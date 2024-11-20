@@ -1,6 +1,9 @@
 from random import * # * - ВСЕ ФУНКЦИИ, randint as rd переназвание функций
 #import random -> random.randint
 
+
+from math import * #pi kasutamiseks
+
 #Ülessane 1
 print ("Tere tulemast!")
 nimi=input("Mis on sinu nimi?").capitalize() #lower() nikita, upper() NIKITA, capitalize() - Nikita
@@ -28,3 +31,10 @@ print=(f"Kokku om {kokku} kommi")
 kommi=int(input("Mitu kommi sa tahad? "))
 kokku=kokku-kommi
 print=(f"Jääk om {kokku} kommi ")
+
+#Ülessane 4
+print("Läbimõõdu leidmine ")
+#ümbermõõt - l
+l=float(input("Ümbermõõt: "))
+d=l/pi 
+print(f"Läbimõõdu suurus on {round(d,2)} ")
