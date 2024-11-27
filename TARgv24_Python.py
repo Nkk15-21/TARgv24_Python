@@ -9,9 +9,14 @@ print ("Tere tulemast!")
 nimi=input("Mis on sinu nimi?").capitalize() #lower() nikita, upper() NIKITA, capitalize() - Nikita
 print("Tere tulemast! Tervitan Sind ",nimi)
 print("Tere tulemast! Tervitan Sind "+ nimi)
-vanus=int(input("Kui vana sa oled? "))
-print("Tere tulemast! Tervitan sind "+ nimi+" Sa oled",vanus,"aastat vana")
-print(f"Tere tulemast! Tervitan sind {nimi} Sa oled {vanus} aastat vana")
+try:
+    vanus=int(input("Kui vana sa oled? "))
+    print("Tere tulemast! Tervitan sind "+ nimi+" Sa oled",vanus,"aastat vana")
+    print(f"Tere tulemast! Tervitan sind {nimi} Sa oled {vanus} aastat vana")
+except:
+    print("On vaja numbried sisestama!" )
+
+
 
 print("------------------------------")
 
