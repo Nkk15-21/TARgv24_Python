@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>28392549-2687-4b0d-9009-3e22e62af2b3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TARgv24_Python.py</StartupFile>
+    <StartupFile>Lihtsad_prgrammid.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
