@@ -93,7 +93,7 @@ from random import *
 #Ülesanne 5
 
 print("\n------------------------------")
-K = " Kill-koll"
+K = " Kill-koll" #capitalize()
 L = K * 2
 M = " Killadi Koll"
 N = " Killkoll"
