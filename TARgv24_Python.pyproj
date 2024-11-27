@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>28392549-2687-4b0d-9009-3e22e62af2b3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TARgv24_Python.py</StartupFile>
+    <StartupFile>Lihtsad_prgrammid.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Lihtsad_prgrammid.py" />
     <Compile Include="TARgv24_Python.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
