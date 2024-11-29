@@ -1,4 +1,4 @@
-﻿from math import * fgdh
+﻿from math import * 
 from calendar import * 
 from datetime import *
 from random import *
