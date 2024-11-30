@@ -1,5 +1,5 @@
 from math import *      # import * from math
-import math
+import math      # import math
 
 
 print("Ruudu karakteristikud")
