@@ -90,17 +90,36 @@ from random import *
 # K = int(C/d)
 # print(f"\nНужно положить рядом {K} 2-евровых монет друг с другом, чтобы линия протянулась вокруг Земли.")
 
-#Ülesanne 5
+# #Ülesanne 5
 
-print("\n------------------------------")
-K = " kill-koll"
-L = K.title() * 2
-M = " killadi koll"
+# print("\n------------------------------")
+# K = " kill-koll"
+# L = K.title() * 2
+# M = " killadi koll"
 
-print(f"\n {L}{M.title()}{L}{M.title()}{L}\n{K.title()}")
-print("\n------------------------------")
+# print(f"\n {L}{M.title()}{L}{M.title()}{L}\n{K.title()}")
+# print("\n------------------------------")
 
-#Ulesanne 6
+# #Ulesanne 6
 
+# print("\n------------------------------")
 
+# a = "Rong see sõitis tsuhh tsuhh tsuhh,"
+# b = "piilupart oli rongijuht."
+# c = "Rattad tegid rat tat taa,"
+# d = "rat tat taa ja tat tat taa."
+# e = "Aga seal rongi peal,"
+# x = "kas sa tead, kes olid seal?"
+# g = "ong see sõitis tuut tuut tuut,"
+# h = "piilupart oli rongijuht."
+# i = "Rattad tegid kill koll koll,"
+# j = "kill koll koll ja kill koll kill."
+# k = "....Sisend, väljund, tingimus...."
+
+# print(f"\n{a.capitalize()}\n{b.capitalize()}\n{c.capitalize()}\n{d.capitalize()}\n{e.capitalize()}\n{x.capitalize()}\n\n{g.capitalize()}\n{h.capitalize()}\n{i.capitalize()}\n{j.capitalize()}\n\n\n\n{k}")
+# print("\n------------------------------")
+
+# #Ulesanne 7
+
+# print("\n------------------------------")
 
