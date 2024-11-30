@@ -93,9 +93,14 @@ from random import *
 #Ülesanne 5
 
 print("\n------------------------------")
-K = " Kill-koll" #capitalize()
-L = K * 2
-M = " Killadi Koll"
-N = " Killkoll"
-print(f"\nНу допустим....{L}{M}{L}{M}{L}{N}{L}")
+K = " kill-koll"
+L = K.title() * 2
+M = " killadi koll"
+
+print(f"\n {L}{M.title()}{L}{M.title()}{L}\n{K.title()}")
+print("\n------------------------------")
+
+#Ulesanne 6
+
+
 
