@@ -68,6 +68,39 @@ from random import *
 
 #         Olgu meil vaja transportida teatud arv inimesi bussidega, milles on teatud arv kohti. Mitu bussi on vaja selleks, et kõik inimesed kohale saaksid, ja mitu inimest on viimases bussis (eeldusel, et eelmised on kõik täiesti täis)? Kirjuta programm, mis küsib inimeste arvu ja busside suuruse ning lahendab seejärel selle ülesande.
 
+# # Ulesanne 1
+
+# print("Введите пожалуйста имя")
+# a = input("Введённое имя: ")
+
+# if a.upper() == "JUKU" or a == "ЮКУ":
+#     print("Пойдём вместе с Юку в кино!")
+#     print("Введите возраст Юку: ")
+#     b = int(input("Возраст равен = "))
+
+#     if b < 0 or b > 100:
+#         print("Ошибка в данных о возрасте!")
+#     elif b < 6:
+#         print("Билет бесплатный.")
+#     elif b <= 14:
+#         print("Нужен детский билет.")
+#     elif b <= 65:
+#         print("Нужен полный билет.")
+#     else:
+#         print("Нужен льготный билет.")
+# else:
+#     print("Что-то не хочется идти в кино...")
+    
+# #Ulesanne 2
+
+# print("Напишите два иени: ")
+# a = input("Первое имя - ")
+# b = input("Второе имя - ")
+
+# if a.isalpha() and b.isalpha():
+#     print("Сегодня они соседи по парте!")
+# else:
+#     print("К сожалению, сегодня они не соседи по парте.")
 
 # #Ülesanne 3 
 
@@ -89,12 +122,15 @@ from random import *
 # except:
 # 	print("Numbrid!!!!!!!!!!")
 
-#Ülesanne 4
-print("\nВведите пожалуйста случайную цену товара: ")
-a = float(input(" \n a = "))
-if a > "700":
-		Pr= a*0,3+a
-		print(f"Цена товара будет состовлять:{Pr}")
-elif a <= "700":
-		N = a
-		print(f"Цена товара бужет состовлять: {N}")
+# #Ülesanne 4
+# print("\nВведите пожалуйста случайную цену товара: ")
+# a = float(input(" \n a = "))
+# if a > 700:
+# 		Pr= a*0,3+a
+# 		print(f"Цена товара будет состовлять:{Pr}")
+# elif a <= 700:
+# 		N = a
+# 		print(f"Цена товара бужет состовлять: {N}")
+
+#Ulesanne 5 
+
