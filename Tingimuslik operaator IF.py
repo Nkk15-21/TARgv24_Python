@@ -92,3 +92,27 @@ from random import *
 # else:
 #     print("Obama")
 
+#Ulesanne 7
+
+print("Введите ваш пол (М/Ж) и рост в сантиметрах: ")
+p = input("Пол: ")
+l = float(input("Рост: "))
+
+if p == "Ж":
+	if l > 140 and l <= 155:
+		print("Ваш рост маленький :) ")
+	elif l > 155 and l <= 170:
+		print("Ваш рост средний")
+	elif l > 170 and l <= 200:
+		print("Ваш рост большой ")
+
+
+if p == "М":
+	if l > 140 and l <= 160:
+		print("Ваш рост маленький :) ")
+	elif l > 160 and l <= 180:
+		print("Ваш рост средний")
+	elif l > 180 and l <= 200:
+		print("Ваш рост большой ")
+else:
+	print("Barak Obama")
