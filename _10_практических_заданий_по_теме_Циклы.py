@@ -14,6 +14,9 @@ if A>0:
 print(f"Vastus {summa}")
 
 
-#Ül 
+#Ül 3
+
+p=0
+for j in range(8):
 
 
