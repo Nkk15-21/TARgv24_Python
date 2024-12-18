@@ -3,9 +3,9 @@ print()
 #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 while 1:
     try:
-        a = (abs(int(input("Введите целое число => "))
+        a = (abs(int(input("Введите целое число => "))))      #a = (abs(int(input("Введите целое число => "))
         break
-    except ValueError:
+    except ValueError:      #    except ValueError:
          print("Это не целое число")
 #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 if a==0:
@@ -17,7 +17,7 @@ else:
     c==b==a
     paaris ==0
     paaritu == 0
-    while b > 0;
+    while b > 0:        #while b > 0;
             if b % 2 = 0:
                     paaris =+ 1
             else:
@@ -31,11 +31,11 @@ else:
     print("*Переворачиваем* введённое число")
     print()
     b=0
-    while a > 0
+    while a > 0:       # while a > 0
         number = a % 10
         a = a // 10
         b = b * 10
-         b =+ number
+        b =+ number
     print("*Перевёрнутое* число", b)
     print()
 #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -50,6 +50,6 @@ else:
                     c == c / 2
             else:
                     c == (3*c + 1) / 2
-            print(c, end=")
+            print(c, end=" ")
     print()
     print("Гипотеза верна'')
