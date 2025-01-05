@@ -55,3 +55,4 @@ else:
 
     print('{:>4}'. format(round(c)), "Гипотеза верна")
     print()
+    

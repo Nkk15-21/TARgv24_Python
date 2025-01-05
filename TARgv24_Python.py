@@ -14,9 +14,7 @@ try:
     print("Tere tulemast! Tervitan sind "+ nimi+" Sa oled",vanus,"aastat vana")
     print(f"Tere tulemast! Tervitan sind {nimi} Sa oled {vanus} aastat vana")
 except:
-    print("On vaja numbried sisestama!" )
-
-
+    print("On vaja numbried sisestama! " )
 
 print("------------------------------")
 

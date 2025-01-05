@@ -9,7 +9,6 @@ print("------------------------------")
 paevadekogus=monthrange(2024,11)[1]
 print(paevadekogus)
 
-
 tana = date.today() #nimetus () - funktsioon
 tanaf = date.today().strftime("%B %d %Y")
 

@@ -13,7 +13,7 @@ print("Ruudu diagonaal", round(di,2))
 
 print()
 
-print("Ristküliku karakteristikud")     # print("Ristküliku karakteristikud"))
+print("Ristküliku karakteristikud ")     # print("Ristküliku karakteristikud"))
 b=float(input("Sisesta ristküliku 1. külje pikkus => "))   # b=input("Sisesta ristküliku 1. külje pikkus => ")
 c=float(input("Sisesta ristküliku 2. külje pikkus => "))   # c=input("Sisesta ristküliku 2. külje pikkus => ")
 S=b*c

@@ -1,7 +1,6 @@
 ﻿import random
 
 
-
 #Ül 2/1 бесконечно, пока не добьётся своего
 
 # from operator import indexOf
