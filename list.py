@@ -28,34 +28,53 @@
 #     print("Znaki: ",z)
 #     print("Probelõ: ",t)
 
-print("-------------------------------------------------------------------------------------------------------")      
+# print("-------------------------------------------------------------------------------------------------------")      
 
-    #Ül 2
-nimed=[] # список
-for i in range(5):
-    nimi = input(f"{i+1} Введите имя: ")
-    nimed.append(nimi) # !!!!!!добавление в список из nimi!!!!!!!!!
+#     #Ül 2
 
-print("Enne sorteerimist: ")
-print(nimed)
-nimed.sort()
-print("Pärast sorteerimise: ")
-print(nimed)
+# vanused=[]
+# for i in ranhe(7):
+#     vanus=int(input(f"{i+1}. Vanus: "))
+#     vanused.append(vanus)
+# print(f"Sissestanud vanused: {vanused}")
+# print(max(vanused))
+# print(min(vanused))
+# print(sum(vanused)/len(vanused))
 
-print(f"Viimasena lisatud nimi on: {nimi}") # {nimed[4]}, {nimed[-1}
 
-v=input("Kas muudame nimed?").lower()
-if v=="jah":
-    v = input("Nimi või positsioooon???: N/P").upper()
-    if v=="P":
-        print("Sisesta nime asukoht: ")
-        v=int(input())
-        uus_nimi=input("Uus nimi: ")
-        nimed[v-1]=uus_nimi
-    else:
-        print("Sisesta nimi: ")
-        vana_nimi=input("Vana nimi: ")
-        v=nimed.index(vana_nimi)
-        uus_nimi=input("Uus nimi: ")
-        nimed[v]=uus_nimi
-    print(nimed)
+# nimed=[] # список
+# for i in range(5):
+#     nimi = input(f"{i+1} Введите имя: ")
+#     nimed.append(nimi) # !!!!!!добавление в список из nimi!!!!!!!!!
+
+# print("Enne sorteerimist: ")
+# print(nimed)
+# nimed.sort()
+# print("Pärast sorteerimise: ")
+# print(nimed)
+
+# print(f"Viimasena lisatud nimi on: {nimi}") # {nimed[4]}, {nimed[-1}
+
+# v=input("Kas muudame nimed?").lower()
+# if v=="jah":
+#     v = input("Nimi või positsioooon???: N/P").upper()
+#     if v=="P":
+#         print("Sisesta nime asukoht: ")
+#         v=int(input())
+#         uus_nimi=input("Uus nimi: ")
+#         nimed[v-1]=uus_nimi
+#     else:
+#         print("Sisesta nimi: ")
+#         vana_nimi=input("Vana nimi: ")
+#         v=nimed.index(vana_nimi)
+#         uus_nimi=input("Uus nimi: ")
+#         nimed[v]=uus_nimi
+#     print(nimed)
+# dubta=list(set(nimed)) # убирает дубликаты, оставляя лишь один
+# print(dubta)
+
+
+# print("-------------------------------------------------------------------------------------------------------") 
+
+    #Ül 3
+
