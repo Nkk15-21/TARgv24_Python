@@ -78,3 +78,21 @@
 
     #Ül 3
 
+
+# values = [12, 18, 19, 33, 42, 53]
+# for value in values:
+#     print('*' * value)
+
+
+zvezda = []
+read=int(input("Кол-во строчек: "))
+for i in range(read):
+    arv=int(input("Число: "))
+    zvezda.append(arv)
+print(zvezda)
+s=input("Симбволы: ")
+for vartus in zvezda:
+    print(vartus*s)
+
+print()
+
