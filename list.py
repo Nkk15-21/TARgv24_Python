@@ -4,9 +4,8 @@ glas = ["a", "e", "u", "o", "i", "ü", "õ", "ö", "ä"]
 sogl = "qwrtypsdfghjklzxcvbnm"
 znak = string.punctuation # /*-+;:_,-.?=)(/&%¤"¤%&/()")
 
-g= s = z = t = 0
-
 while True:
+    g = s = z = t = 0
     tekst = input("Sisesta mingi tekst: ").lower()
     if tekst.isdigit():
         break
@@ -20,4 +19,14 @@ while True:
                 s+=1
             elif taht in znak:
                 z+=1
-            
+            elif taht == " ":
+                t += 1
+
+    print("Glassnõe: ", g)
+
+    print("Soglaaanõe: ", s)
+
+    print("Znaki: ", z)
+
+    print("Probel: ", t)
+
