@@ -1,4 +1,4 @@
-import string 
+import string
 
 glas = ["a", "e", "u", "o", "i", "ü", "õ", "ö", "ä"]
 sogl = "qwrtypsdfghjklzxcvbnm"
@@ -21,12 +21,8 @@ while True:
                 z+=1
             elif taht == " ":
                 t += 1
-
-    print("Glassnõe: ", g)
-
-    print("Soglaaanõe: ", s)
-
-    print("Znaki: ", z)
-
-    print("Probel: ", t)
-
+    print("Glassnõe: ",g)
+    print("Soglaaanõe: ",s)
+    print("Znaki: ",z)
+    print("Probelõ: ",t)
+          
