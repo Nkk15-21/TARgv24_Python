@@ -97,19 +97,21 @@
 
 # print()
 
-    #Ül 4
+#     #Ül 4
 
-indexid = ["Tallinn", "Narva, Narva-Jõesuu", "Kohtla-Järve", "Ida-Virumaa, Lääne-Virumaa, Jõgevamaa", "Tartu linn", "Tartumaa, Põlvamaa, Võrumaa, Valgamaa", "Viljandimaa, Järvamaa, Harjumaa, Raplamaa", "Pärnumaa", "Läänemaa, Hiiumaa, Saaremaa"]
-while 1:
-    try:
-        pind=int(input("Введите индекс города: ")) #12345
-        if len(str(id)) != 5 or not id.isdigit():
-            break
-        else:
-            print(f"Неккоректное число индекса! ")
-    except:
-        print("!!!")
-print("Postiindex analüüs: ")
-index_list=list(str(pind)) # "1","2","3","4","5","..."
-s1=int(index_list[0]) # 1
-print(f"Postiindex {pind} on {indexid[s1-1]}") # 12345 Tallinn
+# indexid = ["Tallinn", "Narva, Narva-Jõesuu", "Kohtla-Järve", "Ida-Virumaa, Lääne-Virumaa, Jõgevamaa", "Tartu linn", "Tartumaa, Põlvamaa, Võrumaa, Valgamaa", "Viljandimaa, Järvamaa, Harjumaa, Raplamaa", "Pärnumaa", "Läänemaa, Hiiumaa, Saaremaa"]
+# while 1:
+#     try:
+#         pind=int(input("Введите индекс города: ")) #12345
+#         if len(str(id)) != 5 or not id.isdigit():
+#             break
+#         else:
+#             print(f"Неккоректное число индекса! ")
+#     except:
+#         print("!!!")
+# print("Postiindex analüüs: ")
+# index_list=list(str(pind)) # "1","2","3","4","5","..."
+# s1=int(index_list[0]) # 1
+# print(f"Postiindex {pind} on {indexid[s1-1]}") # 12345 Tallinn
+
+
