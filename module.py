@@ -52,10 +52,12 @@ def is_year_leap(aasta:int)->bool:
 
     """
     if aasta%4==0:
-        v=True
+        v="Ваш год четный!"
     else:
-        v=False
+        v="Ваш год нечетный!"
     return v
+
+
 
 #-------------------------------------------------
 #3
@@ -77,16 +79,16 @@ def square (сторона)->any:
 def season (numberm)->any:
     """
     """
-    if numberm [1,2,12]:
+    if numberm (1,2,12):
         return "talv"
-    elif numberm in [3, 4, 5]:
+    elif numberm in (3, 4, 5):
         return "kevad"
-    elif numberm in [6, 7, 8]:
+    elif numberm in (6, 7, 8):
         return "suvi"
-    elif numberm in [9, 10, 11]:
+    elif numberm in (9, 10, 11):
         return "sügis"
     else:
-        return "Неверный номер месяца"
+        return  "Неверный номер месяца"
 
 #-------------------------------------------------
 #5
@@ -94,7 +96,7 @@ def season (numberm)->any:
 def bank (a:int, years:int)->float:
     """
     """
-    for i in range(years):
+    for k in range(years):
         a += a * 0.1
     return a
 
