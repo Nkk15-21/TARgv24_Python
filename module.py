@@ -76,29 +76,38 @@ def square (сторона)->any:
 #-------------------------------------------------
 #4
 
-def season (numberm)->any:
-    """
-    """
-    if numberm (1,2,12):
-        return "talv"
-    elif numberm in (3, 4, 5):
-        return "kevad"
-    elif numberm in (6, 7, 8):
-        return "suvi"
-    elif numberm in (9, 10, 11):
-        return "sügis"
-    else:
-        return  "Неверный номер месяца"
+# def season(kuud: int)->str:
+#     """
+#     ::
+#     :param kuud: Номер месяца (1–12)
+#     :rtype: Время года (talv, kevad, suvi, sügis)
+#     """
+#     if kuud in (12, 1, 2):
+#         vastus="talv"
+#     elif kuud in (3, 4, 5):
+#         vastus ="kevad"
+#     elif kuud in (6, 7, 8):
+#         vastus= "suvi"
+#     elif kuud in (9, 10, 11):
+#         vastus="sügis"
+#     else:
+#         vastus="Vigane kuu number"
+#     return vastus
 
 #-------------------------------------------------
 #5
 
-def bank (a:int, years:int)->float:
-    """
-    """
-    for k in range(years):
-        a += a * 0.1
-    return a
+# def bank (a:float, years:int)->float:
+#     """
+#     :param a: Начальная сумма вклада (евро)
+#     :param years: Срок вклада (лет)
+#     :rtype: Итоговая сумма на счету
+
+#     """
+
+#     for _ in range(years):
+#         a +=a*0.10
+#         return round (a, 2)
 
 #-------------------------------------------------
 #6
