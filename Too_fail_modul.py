@@ -3,9 +3,11 @@ from time import sleep
 from os import path, remove
 from tkinter import simpledialog as sd
 from gtts import gTTS
+import smtplib, ssl
+from email.message import EmailMessage
 
 def registreerimine(kasutajad: list, paroolid: list) -> tuple:
-    """Регистрация нового пользователя с проверкой пароля."""
+    """Регистрация нового пользователя с проверкой пароля и отправкой письма с учётными данными."""
     while True:
         nimi = input("Mis on sinu nimi? ")
         if nimi in kasutajad:
@@ -24,6 +26,8 @@ def registreerimine(kasutajad: list, paroolid: list) -> tuple:
                     kasutajad.append(nimi)
                     paroolid.append(parool)
                     print("Registreerimine õnnestus!")
+                    # Вызываем отправку письма с данными пользователя
+                    saada_kiri(nimi, parool)
                     return kasutajad, paroolid
                 else:
                     print("Nõrk salasõna! Parool peab sisaldama suuri ja väikseid tähti, numbreid ning erimärke.")
@@ -110,3 +114,35 @@ def loe_ankeet(fail: str) -> tuple:
     except FileNotFoundError:
         print(f"Faili {fail} ei leitud.")
         return ([], [])
+
+def saada_kiri(nimi: str = None, parool: str = None):
+    """
+    Отправка электронного письма с данными регистрации.
+    Если параметры nimi и parool не переданы, они запрашиваются у пользователя.
+    """
+    if nimi is None:
+        nimi = input("Sisesta kasutajanimi: ")
+    if parool is None:
+        parool = input("Sisesta salasõna: ")
+    kellele = input("Kellele: ")
+    kiri = f"Sa oled registreeritud. Sinu kasutajanimeni on {nimi}, sinu salasõna on {parool}"
+    smtp_server = "smtp.gmail.com"
+    port = 587
+    sender_email = "nikita.konkin12345@gmail.com"
+    password  = input("Sisesta kood: ")
+    context = ssl.create_default_context()
+    msg = EmailMessage()
+    msg.set_content(kiri)
+    msg['Subject'] = "E-kiri saatmine"
+    msg['From'] = "Nikita Konkin"
+    msg['To'] = kellele
+    try:
+        server = smtplib.SMTP(smtp_server, port)
+        server.starttls(context=context)
+        server.login(sender_email, password)
+        server.send_message(msg)
+        print("Informatsioon: Kiri oli saadetud")
+    except Exception as e:
+        print("Tekkis viga!", e)
+    finally:
+        server.quit()

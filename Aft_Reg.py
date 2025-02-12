@@ -12,6 +12,7 @@ while True:
     print("3 - Nime või parooli muutmine")
     print("4 - Unustanud parooli taastamine")
     print("5 - Lõpetamine")
+    print("6 - Saada kiri")
     
     try:
         vastus = int(input("Sisestage arv: "))
@@ -44,5 +45,7 @@ while True:
     elif vastus == 5:
         print("\nLõpetamine")
         break
+    elif vastus == 6:
+        print(saada_kiri())
     else:
         print("Tundmatu valik")
