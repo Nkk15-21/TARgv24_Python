@@ -23,6 +23,9 @@ while True:
     if vastus == 1:
         print("\nRegistreerimine")
         kasutajanimed, salasõnad = registreerimine(kasutajanimed, salasõnad)
+        # Сохраняем обновлённые данные в файлы
+        kirjuta_failisse("Kasutajad.txt", kasutajanimed)
+        kirjuta_failisse("Salasõnad.txt", salasõnad)
     elif vastus == 2:
         print("\nAutoriseerimine")
         autoriseerimine(kasutajanimed, salasõnad)
@@ -40,6 +43,9 @@ while True:
             salasõnad = nimi_või_parooli_muurmine(salasõnad)
         else:
             print("Tundmatu valik.")
+        # Обновляем файлы после изменений
+        kirjuta_failisse("Kasutajad.txt", kasutajanimed)
+        kirjuta_failisse("Salasõnad.txt", salasõnad)
     elif vastus == 4:
         print("\nUnustanud parooli taastamine - funktsioon pole veel implementeeritud.")
     elif vastus == 5:
