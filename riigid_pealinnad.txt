@@ -48,4 +48,4 @@ Ungari-Budapest
 Valgevene-Minsk
 Vatikan-Vatican
 Venemaa-Moskva
-USSR-Maailm
+NSVL-Maailm
