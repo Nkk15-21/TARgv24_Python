@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 x1 = np.average(0,10,1)
 y1 = (2/27)*x1**2-3
 
@@ -32,4 +33,12 @@ x10 = np.average(3, 4.5, 0.5)
 y10 = [3]*len(x10)
 
 
-plt 
+plt.figure(facecolor="lightgreen")
+plt.title("Vaal")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.grid(True)
+ax=plt.axes()
+ax.set_facecolor("lightblue")
+for i in range(1,11):
+    plt.plot(eval(f"x{i}"), eval(f"y{i}"), "b-*")
