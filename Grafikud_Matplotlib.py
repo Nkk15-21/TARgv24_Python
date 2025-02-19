@@ -1,8 +1,8 @@
-
+from cProfile import label
 import numpy as np
 import matplotlib.pyplot as plt
 
-def Vaal():
+def Kit(color:str):
     x1 = np.arange(0,10,1)
     y1 = (2/27)*x1**2-3
 
@@ -45,13 +45,13 @@ def Vaal():
         #для каждой отдельно -> plt.plot(x1,y1, "r:o")
         # сделать разноцветной ->  
 
-    colors=["c" , "m" , "y" , "r" , "g" , "b", "w", "k", "k", "k" ]
+   # colors=["c" , "m" , "y" , "r" , "g" , "b", "w", "k", "k", "k" ]
 
     for i in range(1,11):
-        plt.plot(eval(f"x{i}"), eval(f"y{i}"), colors[i-1]+"-*")
+        plt.plot(eval(f"x{i}"), eval(f"y{i}"), color[0]+ "-*") #colors[i-1]+"-*")
     plt.show()
 
-def Liblikas():
+def Liblikas(color:str):
 
     x1 = np.arange(-9, -1.5, 0.5)
     y1 = (-1/8)*(x1+9)**2+8
@@ -113,9 +113,9 @@ def Liblikas():
             # сделать разноцветной ->  
 
     colors=["c" , "m" , "y" , "r" , "g" , "b", "w", "k", "k", "k", "c" , "m" , "y" , "r" , "g" , "b" ]
-
+    plt.figure(figsize=(8,6))
     for i in range(1,17):
-        plt.plot(eval(f"x{i}"), eval(f"y{i}"), colors[i-1]+"-*", label=f"Liblikas {i} osa")
+        plt.plot(eval(f"x{i}"), eval(f"y{i}"),"b-*", label=f"Liblikas {i} osa")
     
     plt.show()
 
