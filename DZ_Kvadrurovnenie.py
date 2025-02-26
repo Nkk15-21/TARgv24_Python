@@ -38,7 +38,7 @@ def кв_ур():
         #|--------------------------------------------------------------------------------------------|#
 
 # ДЕлаем график
-def plot_graph():
+def график():
     try:
         a = float(entry_a.get())
         b = float(entry_b.get())
@@ -114,7 +114,7 @@ btn_solve = tk.Button(root, text="Решить", command=кв_ур, font=("Arial
                       bg="darkgreen", fg="black", padx=20, pady=5)
 btn_solve.grid(row=1, column=6, padx=10)
 
-btn_plot = tk.Button(root, text="График", command=plot_graph, font=("Arial", 14, "bold"),
+btn_plot = tk.Button(root, text="График", command=график, font=("Arial", 14, "bold"),
                      bg="darkgreen", fg="black", padx=20, pady=5)
 btn_plot.grid(row=1, column=7, padx=10)
 
