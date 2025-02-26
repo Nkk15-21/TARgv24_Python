@@ -30,7 +30,7 @@ def отпр_письмо():
     smtp_server = "smtp.gmail.com"
     port = 587
     sender_email = "nikita.konkin12345@gmail.com"  # Заменить на свой email
-    password = "your_app_password"  # Используйте пароль приложения Gmail
+    password = "fsjx obew grfg jdqd"  # Используйте пароль приложения Gmail
 
     # Создаём письмо
     msg = EmailMessage()
