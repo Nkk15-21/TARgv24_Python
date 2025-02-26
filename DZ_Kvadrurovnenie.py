@@ -3,7 +3,7 @@ from tkinter import messagebox
 import math
 
 # Функция решения квадратного уравнения
-def solve_quadratic():
+def kv_uravn():
     try:
         a = float(entry_a.get())
         b = float(entry_b.get())
@@ -31,10 +31,10 @@ def solve_quadratic():
     
     except ValueError:
         messagebox.showerror("Ошибка", "Введите числовые значения!")
-        highlight_empty_fields()
+        пустые_поля()
 
-# Подсветка незаполненных полей
-def highlight_empty_fields():
+# Подсветка незаполненных полей, ошибки там и тд
+def пустые_поля():
     entries = [entry_a, entry_b, entry_c]
     for entry in entries:
         if entry.get() == "":
@@ -44,13 +44,12 @@ def highlight_empty_fields():
 
 # Создание окна
 root = tk.Tk()
-root.title("Квадратные уравнения")
-root.geometry("500x300")
+root.title("Квадратные уравнения")  #Надпись в щампке
+root.geometry("630x300")  #Размер окна
 root.configure(bg="#F0F0F0")  # Цвет фона окна
 
 # Заголовок
-title_label = tk.Label(root, text="Решение квадратного уравнения", 
-                       font=("Arial", 16, "bold"), fg="green", bg="lightblue", padx=10, pady=5)
+title_label = tk.Label(root, text="Решение квадратного уравнения", font=("Arial", 16, "bold"), fg="green", bg="lightblue", padx=10, pady=5)
 title_label.grid(row=0, column=0, columnspan=4, sticky="ew")
 
 # Поля ввода
@@ -70,13 +69,11 @@ entry_c.grid(row=1, column=4, padx=5, pady=10)
 tk.Label(root, text="= 0", font=("Arial", 14, "bold"), fg="green", bg="#F0F0F0").grid(row=1, column=5)
 
 # Кнопка "Решить"
-btn_solve = tk.Button(root, text="Решить", command=solve_quadratic, font=("Arial", 14, "bold"),
-                      bg="darkgreen", fg="black", padx=20, pady=5)
+btn_solve = tk.Button(root, text="Решить", command=kv_uravn, font=("Arial", 14, "bold"), bg="darkgreen", fg="black", padx=20, pady=5)
 btn_solve.grid(row=1, column=6, padx=10)
 
 # Поле вывода результата
 label_result = tk.Label(root, text="Решение", font=("Arial", 14), fg="black", bg="yellow", padx=10, pady=10, justify="left")
 label_result.grid(row=2, column=0, columnspan=7, pady=20, sticky="ew")
 
-# Запуск
 root.mainloop()
