@@ -1,138 +1,110 @@
 import tkinter as tk
-from tkinter import messagebox
-import random
+from tkinter import messagebox, ttk
+import smtplib
+from email.mime.text import MIMEText
 
-# Файл со словами
-WORDS_FILE = "sonad.txt"
-RESULTS_FILE = "tulemused.txt"
+def sum_digits(n):
+    return sum(int(digit) for digit in str(n))
 
-# Количество попыток
-MAX_ATTEMPTS = 6
+# Словарь для преобразования названий месяцев в числа
+MONTHS = {"Jaanuar": 1, "Veebruar": 2, "Märts": 3, "Aprill": 4, "Mai": 5, "Juuni": 6, "Juuli": 7, "August": 8, "September": 9, "Oktoober": 10, "November": 11, "Detsember": 12}
 
+def calculate_pythagoras_square(name, day, month, year, email):
+    step1 = sum_digits(day) + sum_digits(month)
+    step2 = sum_digits(year)
+    step3 = sum_digits(step1 + step2)
+    step4 = sum_digits(step3)
+    step5 = step3 - 2 * (int(str(day)[0]))
+    step6 = sum_digits(step5)
+    
+    first_row = f"{day}{month}{year}"
+    second_row = f"{step3}{step4}{step5}{step6}"
+    
+    all_digits = first_row + second_row
+    digit_count = {str(i): all_digits.count(str(i)) for i in range(1, 10)}
+    
+    return digit_count, first_row, second_row
 
-def load_words(filename):
-    """Загружает слова из файла и возвращает список"""
+def save_data(name, birthdate, numbers):
+    with open("pythagorase_andmed.txt", "a") as file:
+        file.write(f"Nimi: {name}; Sünnipäev: {birthdate}; Numbrid: {numbers}\n")
+
+def send_email(name, birthdate, matrix, email):
+    message = f"Nimi: {name}\nSünnikuupäev: {birthdate}\nPythagorase ruut:\n{matrix}"
+    msg = MIMEText(message)
+    msg["Subject"] = "Teie Pythagorase ruut"
+    msg["From"] = "your_email@example.com"
+    msg["To"] = email
+    
     try:
-        with open(filename, "r", encoding="utf-8") as file:
-            words = [word.strip().lower() for word in file.readlines()]
-        if not words:
-            messagebox.showerror("Ошибка", f"Файл {filename} пуст! Добавьте слова и перезапустите игру.")
-            return None
-        return words
-    except FileNotFoundError:
-        messagebox.showerror("Ошибка", f"Файл {filename} не найден! Создайте файл и добавьте слова.")
-        return None
+        with smtplib.SMTP("smtp.example.com", 587) as server:
+            server.starttls()
+            server.login("your_email@example.com", "password")
+            server.sendmail("your_email@example.com", email, msg.as_string())
+        messagebox.showinfo("E-mail saadetud", "Tulemus saadeti edukalt!")
+    except Exception as e:
+        messagebox.showerror("E-maili viga", f"Ei saanud e-maili saata: {str(e)}")
 
+def show_result():
+    try:
+        global name_var  # Объявляем переменную глобально
+        name = name_var.get()
+        day = int(day_var.get())
+        month = MONTHS.get(month_var.get(), 0)  # Преобразуем название месяца в число
+        year = int(year_var.get())
+        email = email_var.get()
+        
+        if month == 0:
+            raise ValueError("Vale kuu")
+        
+        matrix, first_row, second_row = calculate_pythagoras_square(name, day, month, year, email)
+        save_data(name, f"{day}.{month}.{year}", first_row + second_row)
+        
+        # Обновление значений в таблице
+        matrix_values = [
+            [matrix.get("1", "-"), matrix.get("4", "-"), matrix.get("7", "-")],
+            [matrix.get("2", "-"), matrix.get("5", "-"), matrix.get("8", "-")],
+            [matrix.get("3", "-"), matrix.get("6", "-"), matrix.get("9", "-")]
+        ]
+        
+        for i in range(3):
+            for j in range(3):
+                matrix_labels[i][j]["text"] = matrix_values[i][j]
+        
+        send_email(name, f"{day}.{month}.{year}", matrix, email)
+    except ValueError:
+        messagebox.showerror("Viga", "Palun sisestage kehtiv sünnikuupäev!")
 
-def choose_word(words):
-    """Выбирает случайное слово из списка"""
-    return random.choice(words) if words else None
+root = tk.Tk()
+root.title("Pythagorase ruudu kalkulaator")
 
+tk.Label(root, text="RASCET TABLITSY PIFAGORA ONLAIN", font=("Arial", 16, "bold")).grid(row=0, column=1, columnspan=2, pady=10)
 
-def check_word(guess, target):
-    """Проверяет слово и возвращает список цветов (зелёный, жёлтый, серый)"""
-    result = []
-    for i, letter in enumerate(guess):
-        if letter == target[i]:
-            result.append("green")  # Правильное место
-        elif letter in target:
-            result.append("yellow")  # Есть в слове, но не там
-        else:
-            result.append("gray")  # Нет в слове
-    return result
+tk.Label(root, text="Teie sünnikuupäev").grid(row=1, column=1)
 
+name_var = tk.StringVar()
+day_var = tk.StringVar()
+month_var = tk.StringVar()
+year_var = tk.StringVar()
+email_var = tk.StringVar()
 
-class WordleGame:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Wordle mäng")
-        self.words = load_words(WORDS_FILE)
+tk.Entry(root, textvariable=name_var).grid(row=0, column=2)
+day_dropdown = ttk.Combobox(root, textvariable=day_var, values=[str(i) for i in range(1, 32)], width=5)
+day_dropdown.grid(row=2, column=0)
+month_dropdown = ttk.Combobox(root, textvariable=month_var, values=list(MONTHS.keys()), width=10)
+month_dropdown.grid(row=2, column=1)
+year_dropdown = ttk.Combobox(root, textvariable=year_var, values=[str(i) for i in range(1900, 2025)], width=8)
+year_dropdown.grid(row=2, column=2)
 
-        if not self.words:  # Проверка, загрузились ли слова
-            self.root.destroy()  # Закрываем программу, если слов нет
-            return
+tk.Button(root, text="Arvuta ruut", font=("Arial", 12, "bold"), command=show_result).grid(row=3, column=1, pady=10)
 
-        self.target_word = choose_word(self.words)
+matrix_labels = []
+for i in range(3):
+    row = []
+    for j in range(3):
+        label = tk.Label(root, text="-", width=5, height=2, relief="ridge", font=("Arial", 14))
+        label.grid(row=i+4, column=j, padx=5, pady=5)
+        row.append(label)
+    matrix_labels.append(row)
 
-        if not self.target_word:  # Проверка, выбрано ли слово
-            messagebox.showerror("Ошибка", "Не удалось выбрать слово для игры!")
-            self.root.destroy()
-            return
-
-        self.attempts = 0
-        self.entries = []
-        self.create_widgets()
-
-    def create_widgets(self):
-        tk.Label(self.root, text="Wordle mäng", font=("Arial", 16)).pack()
-
-        self.entry_vars = []
-        for i in range(MAX_ATTEMPTS):
-            frame = tk.Frame(self.root)
-            frame.pack()
-            entry_row = []
-            var_row = []
-            for _ in range(len(self.target_word)):
-                var = tk.StringVar()
-                var_row.append(var)
-                entry = tk.Entry(frame, width=3, font=("Arial", 14), justify="center", textvariable=var)
-                entry.pack(side=tk.LEFT, padx=2, pady=2)
-                entry_row.append(entry)
-            self.entry_vars.append(var_row)
-            self.entries.append(entry_row)
-
-        self.check_button = tk.Button(self.root, text="Kontrolli", command=self.check_attempt)
-        self.check_button.pack(pady=5)
-
-        self.restart_button = tk.Button(self.root, text="Uus mäng", command=self.new_game)
-        self.restart_button.pack(pady=5)
-
-    def check_attempt(self):
-        if self.attempts >= MAX_ATTEMPTS:
-            messagebox.showinfo("Mäng lõppes", "Вы исчерпали все попытки!")
-            return
-
-        guess = "".join(var.get().lower() for var in self.entry_vars[self.attempts])
-        if len(guess) != len(self.target_word) or guess not in self.words:
-            messagebox.showerror("Ошибка", "Неверное слово!")
-            return
-
-        colors = check_word(guess, self.target_word)
-        for i, entry in enumerate(self.entries[self.attempts]):
-            entry.config(bg=colors[i])
-
-        self.attempts += 1
-
-        if guess == self.target_word:
-            messagebox.showinfo("Поздравляем!", "Вы угадали слово!")
-            self.save_result(True)
-            return
-
-        if self.attempts >= MAX_ATTEMPTS:
-            messagebox.showinfo("Мимо!", f"Слово было: {self.target_word}")
-            self.save_result(False)
-
-    def save_result(self, success):
-        """Сохраняет результат в файл"""
-        with open(RESULTS_FILE, "a", encoding="utf-8") as file:
-            result = "Угадано" if success else "Не угадано"
-            file.write(f"{result}: {self.target_word}\n")
-
-    def new_game(self):
-        """Перезапускает игру"""
-        self.target_word = choose_word(self.words)
-        if not self.target_word:
-            messagebox.showerror("Ошибка", "Не удалось выбрать слово для игры!")
-            return
-
-        self.attempts = 0
-        for row in self.entries:
-            for entry in row:
-                entry.config(bg="white")
-                entry.delete(0, tk.END)
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    game = WordleGame(root)
-    root.mainloop()
+root.mainloop()
