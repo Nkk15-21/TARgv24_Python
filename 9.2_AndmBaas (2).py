@@ -2,7 +2,6 @@ import sqlite3
 from tkinter import messagebox
 import tkinter as tk
 from os import path
-from tkinter import ttk
 
 create_table = """
 CREATE TABLE IF NOT EXISTS movies (
@@ -126,7 +125,3 @@ submit_button.grid(row=len(labels), column=0, columnspan=2, pady=20)
 
 # Отображение окна
 root.mainloop()
-
-
-#-------------------------------------------------------#
-
