@@ -6,6 +6,7 @@ from os import path, makedirs
 from PIL import Image, ImageTk, ImageSequence
 from datetime import datetime
 import os
+import random
 
 # Класс для анимации гифки
 class AnimatedGIF(tk.Label):
@@ -73,6 +74,9 @@ def open_game_window():
 
     # Старт игры
     def start_game():
+        gif_bg = AnimatedGIF(game_win, "Seewar/background.gif", delay=100)
+        gif_bg.place(x=0, y=0, relwidth=1, relheight=1)
+
         name = name_var.get().strip()
         if not name:
             messagebox.showerror("Ошибка", "Пожалуйста, введите имя игрока.")
@@ -100,25 +104,92 @@ def open_game_window():
         timer_label = tk.Label(game_field, textvariable=timer_var, font=("Arial", 14), bg="#dff")
         timer_label.pack()
 
-        # Игровое поле
         grid_frame = tk.Frame(game_field, bg="#dff")
         grid_frame.pack(pady=20)
         buttons = []
 
-        def on_cell_click(x, y):
-            btn = buttons[x][y]
-            btn.config(text="💥", state="disabled")
+        size_map = map_size_var.get()
+        if size_map == "маленький":
+            size = 7
+        elif size_map == "большой":
+            size = 15
+        else:
+            size = 10
 
-        for i in range(10):
+        board = [[0 for _ in range(size)] for _ in range(size)]
+
+        ship_lengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
+        ships = []
+
+        def can_place_ship(x, y, dx, dy, length):
+            for i in range(length):
+                nx, ny = x + dx*i, y + dy*i
+                if not (0 <= nx < size and 0 <= ny < size):
+                    return False
+                if board[nx][ny] != 0:
+                    return False
+                for dx_n in [-1, 0, 1]:
+                    for dy_n in [-1, 0, 1]:
+                        cx, cy = nx + dx_n, ny + dy_n
+                        if 0 <= cx < size and 0 <= cy < size and board[cx][cy] != 0:
+                            return False
+            return True
+
+        def place_ship(length):
+            placed = False
+            while not placed:
+                x = random.randint(0, size - 1)
+                y = random.randint(0, size - 1)
+                dx, dy = random.choice([(1, 0), (0, 1)])
+                if can_place_ship(x, y, dx, dy, length):
+                    coords = []
+                    for i in range(length):
+                        nx, ny = x + dx*i, y + dy*i
+                        board[nx][ny] = 1
+                        coords.append((nx, ny))
+                    ships.append({"cells": coords, "hits": set()})
+                    placed = True
+
+        for length in ship_lengths:
+            place_ship(length)
+
+        total_ship_cells = sum(ship_lengths)
+        hits = 0
+
+        def on_cell_click(x, y):
+            nonlocal hits
+            btn = buttons[x][y]
+            btn.config(state="disabled")
+
+            if board[x][y] == 1:
+                btn.config(text="🔥", bg="red")
+                hits += 1
+
+                for ship in ships:
+                    if (x, y) in ship["cells"]:
+                        ship["hits"].add((x, y))
+                        if set(ship["cells"]) == ship["hits"]:
+                            messagebox.showinfo("Корабль потоплен!", "Вы потопили корабль! 🚢💥")
+                        break
+
+                if hits == total_ship_cells:
+                    end_time = datetime.now()
+                    duration = (end_time - start_time).seconds
+                    save_game_log(name, map_size_var.get(), "Победа", duration)
+                    messagebox.showinfo("Победа", "Вы уничтожили все корабли! 🎉")
+                    game_field.destroy()
+            else:
+                btn.config(text="💥")
+
+        for i in range(size):
             row = []
-            for j in range(10):
+            for j in range(size):
                 btn = tk.Button(grid_frame, text="", width=3, height=1, font=("Arial", 12),
                                 command=lambda x=i, y=j: on_cell_click(x, y))
                 btn.grid(row=i, column=j, padx=1, pady=1)
                 row.append(btn)
             buttons.append(row)
 
-        # Обратный отсчёт
         def countdown(t):
             if t <= 0:
                 end_time = datetime.now()
@@ -132,17 +203,58 @@ def open_game_window():
 
         countdown(time_seconds)
 
-    # Кнопка старта
     start_btn = tk.Button(game_win, text="Начать игру", font=("Arial", 14), command=start_game)
     start_btn.place(x=330, y=220)
 
-    # Кнопка назад
     def back_to_menu():
         game_win.destroy()
         root.deiconify()
 
     back_btn = tk.Button(game_win, text="Назад в меню", font=("Arial", 14), command=back_to_menu)
     back_btn.place(x=337, y=700)
+
+
+
+def open_history_window():
+    history_win = tk.Toplevel(root)
+    history_win.title("История игр")
+    history_win.geometry("600x400")
+    history_win.configure(bg="#f0f0f0")
+
+    tk.Label(history_win, text="История сыгранных боёв:", font=("Arial", 16), bg="#f0f0f0").pack(pady=10)
+
+    listbox = tk.Listbox(history_win, font=("Courier New", 12), width=80)
+    listbox.pack(pady=10, padx=10, fill="both", expand=True)
+
+    text_area = tk.Text(history_win, font=("Arial", 12), height=10)
+    text_area.pack(padx=10, pady=10, fill="both", expand=True)
+
+    def show_selected_log(event):
+        selection = listbox.curselection()
+        if selection:
+            filename = listbox.get(selection[0])
+            filepath = os.path.join("game_logs", filename)
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+                text_area.delete("1.0", tk.END)
+                text_area.insert(tk.END, content)
+
+    listbox.bind("<<ListboxSelect>>", show_selected_log)
+
+    if not os.path.exists("game_logs"):
+        os.makedirs("game_logs")
+
+    logs = os.listdir("game_logs")
+    logs.sort(reverse=True)
+    for log_file in logs:
+        if log_file.endswith(".txt"):
+            listbox.insert(tk.END, log_file)
+
+    if listbox.size() > 0:
+        listbox.select_set(0)
+        listbox.event_generate("<<ListboxSelect>>")
+
+
 
 # Главное окно
 root = tk.Tk()
@@ -158,10 +270,12 @@ label.pack(pady=10)
 btn_start = tk.Button(root, text="Старт", font=("Georgia", 16), bg="white", command=open_game_window)
 btn_start.pack(pady=20)
 
-btn_history = tk.Button(root, text="История", font=("Georgia", 16), bg="white")
+btn_history = tk.Button(root, text="История", font=("Georgia", 16), bg="white", command=open_history_window)
 btn_history.pack(pady=10)
 
 btn_exit = tk.Button(root, text="Выход", font=("Georgia", 16), bg="white", command=root.destroy)
 btn_exit.pack(pady=10)
+
+
 
 root.mainloop()
