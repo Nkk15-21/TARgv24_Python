@@ -45,16 +45,16 @@ def open_game_window():
 
     game_win = tk.Toplevel()
     game_win.title("Морской бой — Игра")
-    game_win.geometry("800x800")
-    game_win.configure(bg="#cceeff")
+    game_win.geometry("640x512")
 
-    # Имя игрока
+    gif = AnimatedGIF(game_win, "background.gif", delay=100)
+    gif.place(x=0, y=0, relwidth=1, relheight=1)
+
     tk.Label(game_win, text="Введите имя:", font=("Arial", 14), bg="#cceeff").place(x=50, y=30)
     name_var = tk.StringVar()
     name_entry = tk.Entry(game_win, textvariable=name_var, font=("Arial", 14), width=25)
     name_entry.place(x=200, y=30)
 
-    # Размер карты
     tk.Label(game_win, text="Размер карты:", font=("Arial", 14), bg="#cceeff").place(x=50, y=90)
     map_size_var = tk.StringVar(value="средний")
     sizes = [("Маленький", "маленький"), ("Средний", "средний"), ("Большой", "большой")]
@@ -64,7 +64,6 @@ def open_game_window():
                        font=("Arial", 12), bg="#cceeff").place(x=x_pos, y=90)
         x_pos += 120
 
-    # Время
     tk.Label(game_win, text="Ограничение по времени:", font=("Arial", 14), bg="#cceeff").place(x=50, y=150)
     time_limit_var = tk.StringVar()
     time_combo = ttk.Combobox(game_win, textvariable=time_limit_var, font=("Arial", 12),
@@ -72,11 +71,7 @@ def open_game_window():
     time_combo.place(x=280, y=150)
     time_combo.set("5 минут")
 
-    # Старт игры
     def start_game():
-        gif_bg = AnimatedGIF(game_win, "Seewar/background.gif", delay=100)
-        gif_bg.place(x=0, y=0, relwidth=1, relheight=1)
-
         name = name_var.get().strip()
         if not name:
             messagebox.showerror("Ошибка", "Пожалуйста, введите имя игрока.")
@@ -104,7 +99,7 @@ def open_game_window():
         timer_label = tk.Label(game_field, textvariable=timer_var, font=("Arial", 14), bg="#dff")
         timer_label.pack()
 
-        grid_frame = tk.Frame(game_field, bg="#dff")
+        grid_frame = tk.Frame(game_field, bg="#dff", padx=10, pady=10, bd=2, relief="ridge")
         grid_frame.pack(pady=20)
         buttons = []
 
@@ -124,7 +119,7 @@ def open_game_window():
         def can_place_ship(x, y, dx, dy, length):
             for i in range(length):
                 nx, ny = x + dx*i, y + dy*i
-                if not (0 <= nx < size and 0 <= ny < size):
+                if not (1 <= nx < size - 1 and 1 <= ny < size - 1):
                     return False
                 if board[nx][ny] != 0:
                     return False
@@ -137,9 +132,9 @@ def open_game_window():
 
         def place_ship(length):
             placed = False
-            while not placed:
-                x = random.randint(0, size - 1)
-                y = random.randint(0, size - 1)
+            for _ in range(100):
+                x = random.randint(1, size - 2)
+                y = random.randint(1, size - 2)
                 dx, dy = random.choice([(1, 0), (0, 1)])
                 if can_place_ship(x, y, dx, dy, length):
                     coords = []
@@ -149,6 +144,9 @@ def open_game_window():
                         coords.append((nx, ny))
                     ships.append({"cells": coords, "hits": set()})
                     placed = True
+                    break
+            if not placed:
+                print(f"Не удалось разместить корабль длиной {length}")
 
         for length in ship_lengths:
             place_ship(length)
@@ -169,14 +167,14 @@ def open_game_window():
                     if (x, y) in ship["cells"]:
                         ship["hits"].add((x, y))
                         if set(ship["cells"]) == ship["hits"]:
-                            messagebox.showinfo("Корабль потоплен!", "Вы потопили корабль! 🚢💥")
+                            messagebox.showinfo("Корабль потоплен!", "Вы потопили корабль!")
                         break
 
                 if hits == total_ship_cells:
                     end_time = datetime.now()
                     duration = (end_time - start_time).seconds
                     save_game_log(name, map_size_var.get(), "Победа", duration)
-                    messagebox.showinfo("Победа", "Вы уничтожили все корабли! 🎉")
+                    messagebox.showinfo("Победа", "Вы уничтожили все корабли! ")
                     game_field.destroy()
             else:
                 btn.config(text="💥")
@@ -184,7 +182,7 @@ def open_game_window():
         for i in range(size):
             row = []
             for j in range(size):
-                btn = tk.Button(grid_frame, text="", width=3, height=1, font=("Arial", 12),
+                btn = tk.Button(grid_frame, text="", width=3, height=1, font=("Consolas", 12, "bold"), relief="raised", bg="#e6f2ff", activebackground="#cce0ff",
                                 command=lambda x=i, y=j: on_cell_click(x, y))
                 btn.grid(row=i, column=j, padx=1, pady=1)
                 row.append(btn)
@@ -212,8 +210,6 @@ def open_game_window():
 
     back_btn = tk.Button(game_win, text="Назад в меню", font=("Arial", 14), command=back_to_menu)
     back_btn.place(x=337, y=700)
-
-
 
 def open_history_window():
     history_win = tk.Toplevel(root)
@@ -254,14 +250,11 @@ def open_history_window():
         listbox.select_set(0)
         listbox.event_generate("<<ListboxSelect>>")
 
-
-
-# Главное окно
 root = tk.Tk()
 root.title("Морской бой")
 root.geometry("640x512")
 
-gif = AnimatedGIF(root, "Seewar/background.gif", delay=100)
+gif = AnimatedGIF(root, "background.gif", delay=100)
 gif.place(x=0, y=0, relwidth=1, relheight=1)
 
 label = tk.Label(root, text="Добро пожаловать в морской бой!", font=("Arial", 18), bg="#cceeff")
@@ -275,7 +268,5 @@ btn_history.pack(pady=10)
 
 btn_exit = tk.Button(root, text="Выход", font=("Georgia", 16), bg="white", command=root.destroy)
 btn_exit.pack(pady=10)
-
-
 
 root.mainloop()
